@@ -15,13 +15,15 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'price', 'amount', 'author', 'status']
+    list_display = ['title', 'category', 'price', 'amount', 'author', 'image_tag', 'status']
+    readonly_fields = ('image_tag',)
     list_filter = ['status', 'category']
     inlines = [ProductImageInLine]
 
 
 class ImagesAdmin(admin.ModelAdmin):
-    list_display = ['title', 'product', 'image']
+    list_display = ['title', 'product', 'image_tag']
+    readonly_fields = ('image_tag',)
 
 
 admin.site.register(Category, CategoryAdmin)
