@@ -1,12 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>First Page</title>
-</head>
-<body>
-<h1>SA</h1>
-<h2>{{ text | safe }}</h2>
+{% extends 'homebase.html' %}
 
-</body>
-</html>
+{% block title %} İndex Sayfası {% endblock %}
+{% block keywords %} İndex Sayfası Anahtar Kelimeler {% endblock %}
+{% block description %} İndex Sayfası Açıklama {% endblock %}
+
+{% block herosection %}
+    {% include 'herosection.html' %}
+{% endblock %}
+
+{% block categoryslider %}
+    {% include 'categoryslider.html' %}
+{% endblock %}
+
+
+{% block body %}
+    {% include 'content.html' %}
+{% endblock %}
