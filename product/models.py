@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Category(models.Model):
@@ -36,7 +37,7 @@ class Product(models.Model):
     keywords = models.CharField(max_length=255)
     price = models.FloatField()
     amount = models.IntegerField()
-    detail = models.TextField()
+    detail = RichTextUploadingField()
     author = models.CharField(max_length=50)
     publisher = models.CharField(max_length=200)
     pages = models.IntegerField()
