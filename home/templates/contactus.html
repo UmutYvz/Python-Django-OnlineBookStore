@@ -1,0 +1,48 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} Referanslarımız -  {{ setting.company }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %}
+    <link rel="shorcut icon" type="image/x-icon" href="{{ setting.icon.url }}"/>
+{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>İletişim</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Anasayfa&nbsp;&nbsp; </a>
+                            <span>İletişim</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                {{ setting.contact | safe }}
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section End -->
+
+
+
+
+{% endblock %}
+
+
+{% block body %}
+
+{% endblock %}
