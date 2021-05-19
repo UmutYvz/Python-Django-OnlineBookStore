@@ -43,6 +43,7 @@ class Product(models.Model):
     pages = models.IntegerField()
     year_released = models.IntegerField()
     size = models.CharField(max_length=30)
+    slug = models.SlugField(blank=True,max_length=150)
     image = models.ImageField(blank=True, upload_to='images/')
     status = models.CharField(max_length=10, choices=STATUS)
     create_at = models.DateTimeField(auto_now_add=True)

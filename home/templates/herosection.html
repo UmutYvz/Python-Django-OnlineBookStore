@@ -46,13 +46,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="{% static 'img/hero/banner.jpg' %}">
-                    <div class="hero__text">
-                        <span>Buraya slider</span>
-                        <h2>Vegetable <br/>100% Organic</h2>
-                        <p>Free Pickup and Delivery Available</p>
-                        <a href="#" class="primary-btn">SHOP NOW</a>
+
+                <div class="hero__text">
+
+
+                    <div class="container">
+                        <div class="categories__slider owl-carousel">
+
+                            {% for rs in sliderdata %}
+                                <div class="col-lg-3">
+                                    <div class="categories__item set-bg"
+                                         data-setbg="{{ rs.image.url }} ">
+                                        <h5><a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a></h5>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

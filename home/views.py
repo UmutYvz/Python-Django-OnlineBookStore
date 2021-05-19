@@ -6,11 +6,13 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 
 from home.models import Setting, ContactFormMessage, ContactFormu
+from product.models import Product
 
 
 def index(request):
+    sliderData = Product.objects.all()[:5]
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting, 'page': 'home'}
+    context = {'setting': setting, 'page': 'home', 'sliderdata': sliderData}
     return render(request, 'index.html', context)
 
 
@@ -42,5 +44,5 @@ def contact(request):
 
     setting = Setting.objects.get(pk=1)
     form = ContactFormu()
-    context = {'setting': setting, 'page': 'iletisim', 'form':form}
+    context = {'setting': setting, 'page': 'iletisim', 'form': form}
     return render(request, 'contactus.html', context)
