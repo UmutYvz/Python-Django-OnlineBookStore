@@ -1,5 +1,9 @@
 {% load static %}
 <!-- Hero Section Begin -->
+<style>
+
+</style>
+
 <section class="hero">
     <div class="container">
         <div class="row">
@@ -7,23 +11,32 @@
                 <div class="hero__categories">
                     <div class="hero__categories__all">
                         <i class="fa fa-bars"></i>
-                        <span>All departments</span>
+                        <span>Kitap Kategorileri</span>
                     </div>
+
+
+                    {% load mptt_tags %}
                     <ul>
-                        <li><a href="#">Fresh Meat</a></li>
-                        <li><a href="#">Vegetables</a></li>
-                        <li><a href="#">Fruit & Nut Gifts</a></li>
-                        <li><a href="#">Fresh Berries</a></li>
-                        <li><a href="#">Ocean Foods</a></li>
-                        <li><a href="#">Butter & Eggs</a></li>
-                        <li><a href="#">Fastfood</a></li>
-                        <li><a href="#">Fresh Onion</a></li>
-                        <li><a href="#">Papayaya & Crisps</a></li>
-                        <li><a href="#">Oatmeal</a></li>
-                        <li><a href="#">Fresh Bananas</a></li>
+                        {% recursetree category %}
+                            <li style="margin: -5px">
+                                <a style="font-weight: 700" href="/category/{{ node.slug }}">{{ node.title }}
+                                    {% if not node.is_leaf_node %}
+                                        <ul class="children" style="border: none">
+                                            <a href="/category/{{ node.slug }}">
+                                                {{ children }}
+                                            </a>
+                                        </ul>
+                                    {% endif %}
+                            </li>
+                        {% endrecursetree %}
                     </ul>
+
                 </div>
+
+
             </div>
+
+
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">

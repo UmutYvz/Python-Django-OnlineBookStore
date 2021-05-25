@@ -6,13 +6,18 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 
 from home.models import Setting, ContactFormMessage, ContactFormu
-from product.models import Product
+from product.models import Product, Category
 
 
 def index(request):
     sliderData = Product.objects.all()[:5]
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting, 'page': 'home', 'sliderdata': sliderData}
+    category = Category.objects.all()
+    context = {'setting': setting,
+               'page': 'home',
+               'sliderdata': sliderData,
+               'category': category}
+
     return render(request, 'index.html', context)
 
 

@@ -80,5 +80,39 @@
 <script src="{% static 'js/mixitup.min.js' %}"></script>
 <script src="{% static 'js/owl.carousel.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+<script>
+    let click = false
+    {#const eleman = document.querySelectorAll()#}
+    {#const deneme = document.querySelectorAll('.deneme').addEventListener("click", (e)=>{#}
+    {##}
+    {#    click = !click#}
+    {#    console.log(e)#}
+    {#    if(click){#}
+    {#        eleman.style.display = 'block'#}
+    {#    }else{#}
+    {#        eleman.style.display = 'none'#}
+    {#    }#}
+    {##}
+
+
+    const dene = document.querySelectorAll('.sdf');
+    dene.forEach(d => {
+        if (d.nextElementSibling) {
+            console.log(d)
+            {#if (d.nextElementSibling.className === 'children') {#}
+            {##}
+            {#    d.addEventListener("click", (e) => {#}
+            {#       if(d.nextElementSibling.style.display === 'none') {#}
+            {#           d.nextElementSibling.style.display = 'block'#}
+            {#       }else{#}
+            {#           d.nextElementSibling.style.display = 'none'#}
+            {#       }#}
+            {#    })#}
+
+
+        }
+    })
+
+</script>
 
 
