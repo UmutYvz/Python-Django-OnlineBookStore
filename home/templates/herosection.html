@@ -19,10 +19,10 @@
                     <ul>
                         {% recursetree category %}
                             <li style="margin: -5px">
-                                <a style="font-weight: 700" href="/category/{{ node.slug }}">{{ node.title }}
+                                <a style="font-weight: 700" href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}
                                     {% if not node.is_leaf_node %}
                                         <ul class="children" style="border: none">
-                                            <a href="/category/{{ node.slug }}">
+                                            <a href="/category/{{ node.id }}/{{ node.slug }}">
                                                 {{ children }}
                                             </a>
                                         </ul>

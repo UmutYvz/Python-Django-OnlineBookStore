@@ -51,3 +51,15 @@ def contact(request):
     form = ContactFormu()
     context = {'setting': setting, 'page': 'iletisim', 'form': form}
     return render(request, 'contactus.html', context)
+
+
+def category_products(request, id, slug):
+    category = Category.objects.filter(parent__isnull=False)
+    products = Product.objects.filter(category_id=id)
+    productsCount = Product.objects.filter(category_id=id).count()
+    categoryData = Category.objects.get(pk=id)
+    context = {'products': products,
+               'category': category,
+               'categorydata': categoryData,
+               'count': productsCount}
+    return render(request, 'products.html', context)
