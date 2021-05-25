@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 
 from home.models import Setting, ContactFormMessage, ContactFormu
-from product.models import Product, Category
+from product.models import Product, Category, Images
 
 
 def index(request):
@@ -31,13 +31,17 @@ def index(request):
 
 def aboutus(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting, 'page': 'hakkımızda'}
+    category = Category.objects.all()
+
+    context = {'category': category, 'setting': setting, 'page': 'hakkımızda'}
     return render(request, 'aboutus.html', context)
 
 
 def references(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting, 'page': 'hakkımızda'}
+    category = Category.objects.all()
+
+    context = {'category': category, 'setting': setting, 'page': 'hakkımızda'}
     return render(request, 'references.html', context)
 
 
@@ -71,3 +75,15 @@ def category_products(request, id, slug):
                'categorydata': categoryData,
                'count': productsCount}
     return render(request, 'products.html', context)
+
+
+def product_detail(request, id, slug):
+    category = Category.objects.all()
+    product = Product.objects.get(pk=id)
+    images = Images.objects.filter(product_id=id)
+    context = {
+        'product': product,
+        'category': category,
+        'images':images
+    }
+    return render(request, 'product_detail.html', context)

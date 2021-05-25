@@ -9,7 +9,7 @@
                 </div>
             </div>
         </div>
-        <div class="row featured__filter">
+        <div class="row ">
             {% for rs in lastproducts %}
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
 
@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="row featured__filter">
+        <div class="row ">
             {% for rs in dailyproducts %}
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
 
@@ -73,7 +73,7 @@
                 </div>
             </div>
         </div>
-        <div class="row featured__filter">
+        <div class="row ">
             {% for rs in randomproducts %}
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
 
@@ -118,71 +118,3 @@
 </div>
 <!-- Banner End -->
 
-
-<!-- Latest Product Section Begin -->
-<!--<section class="latest-product spad">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-4 col-md-6">
-                <div class="latest-product__text">
-                    <h4>En Son Kitaplar</h4>
-                    <div class="latest-prdouct__slider__item">
-                        {% for rs in lastproducts %}
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="/media/{{ rs.image }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>{{ rs.title }}</h6>
-                                    <span>{{ rs.price }} &#8378;</span>
-                                </div>
-                            </a>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="latest-product__text">
-                    <h4>Günlük Kitaplar</h4>
-                    <div class="latest-prdouct__slider__item">
-                        {% for rs in dailyproducts %}
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="/media/{{ rs.image }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>{{ rs.title }}</h6>
-                                    <span>{{ rs.price }} &#8378;</span>
-                                </div>
-                            </a>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="latest-product__text">
-                    <h4>Rasgele Kitaplar</h4>
-                    <div class="latest-prdouct__slider__item">
-                        {% for rs in randomproducts %}
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="/media/{{ rs.image }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>{{ rs.title }}</h6>
-                                    <span>{{ rs.price }} &#8378;</span>
-                                </div>
-                            </a>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</section>-->
-<!-- Latest Product Section End -->
