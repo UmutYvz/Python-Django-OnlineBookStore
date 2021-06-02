@@ -11,6 +11,103 @@
     {% include 'header.html' %}
 {% endblock %}
 {% block content %}
+
+    <style>
+        .star-rating {
+            font-size: 0;
+            white-space: nowrap;
+            display: inline-block;
+            /* width: 250px; remove this */
+            height: 50px;
+            overflow: hidden;
+            position: relative;
+            background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+            background-size: contain;
+        }
+
+        .star-rating i {
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            /* width: 20%; remove this */
+            z-index: 1;
+            background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRkZERjg4IiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+            background-size: contain;
+        }
+
+        .star-rating input {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            opacity: 0;
+            display: inline-block;
+            /* width: 20%; remove this */
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            z-index: 2;
+            position: relative;
+        }
+
+        .star-rating input:hover + i,
+        .star-rating input:checked + i {
+            opacity: 1;
+        }
+
+        .star-rating i ~ i {
+            width: 40%;
+        }
+
+        .star-rating i ~ i ~ i {
+            width: 60%;
+        }
+
+        .star-rating i ~ i ~ i ~ i {
+            width: 80%;
+        }
+
+        .star-rating i ~ i ~ i ~ i ~ i {
+            width: 100%;
+        }
+
+        ::after,
+        ::before {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .star-rating.star-5 {
+            width: 250px;
+        }
+
+        .star-rating.star-5 input,
+        .star-rating.star-5 i {
+            width: 20%;
+        }
+
+        .star-rating.star-5 i ~ i {
+            width: 40%;
+        }
+
+        .star-rating.star-5 i ~ i ~ i {
+            width: 60%;
+        }
+
+        .star-rating.star-5 i ~ i ~ i ~ i {
+            width: 80%;
+        }
+
+        .star-rating.star-5 i ~ i ~ i ~ i ~ i {
+            width: 100%;
+        }
+
+
+    </style>
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumbb.jpg' %}">
         <div class="container">
@@ -76,6 +173,11 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                     <div class="product__details__text">
                         <h3>{{ product.title }}</h3>
                         <div class="product__details__rating">
@@ -122,7 +224,13 @@
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
                                    aria-selected="true">Kitap Açıklaması</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                                   aria-selected="false">Yorumlar</a>
+                            </li>
                         </ul>
+
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
@@ -131,7 +239,113 @@
                                 </div>
                             </div>
 
+                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <div class="aa-product-review-area">
+                                        {% for message in messages %}
+                                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                        <h4 style="font-size: 25px; font-weight: bold;margin-bottom: 20px;text-transform: uppercase">
+                                            Bu ürün için 2 yorum var</h4>
+                                        <ul class="aa-review-nav" style="padding: 0;margin: 0;list-style: none;">
+
+                                            {% for rs in comments %}
+
+                                                <li>
+
+                                                    <div class="media" style="margin-bottom: 20px;">
+                                                        <div class="media-left" style="    display: table-cell;
+                                                    vertical-align: top">
+                                                            <a href="#" style="margin-right: 10px;">
+                                                                <img class="media-object"
+                                                                     src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5f4bd7a6-f763-4518-9b81-bdfd40ce3fc9/d26yf2h-e858f532-4b44-4584-a255-fdedf789cb0b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzVmNGJkN2E2LWY3NjMtNDUxOC05YjgxLWJkZmQ0MGNlM2ZjOVwvZDI2eWYyaC1lODU4ZjUzMi00YjQ0LTQ1ODQtYTI1NS1mZGVkZjc4OWNiMGIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ZzXpoMDLZrRAgEjqk0TVOV8RMiA_MBx5xhq99fdUZUg"
+                                                                     alt="girl image" width="120px">
+                                                            </a>
+                                                        </div>
+                                                        <div class="media-body" style="border: 1px solid #ccc;
+                                                    padding: 10px; font-size:16px">
+                                                            <h4 class="media-heading" style="font-size:16px">
+                                                                <strong> {{ rs.user.first_name }} </strong> -
+                                                                <span>{{ rs.create_at }}</span>
+                                                            </h4>
+                                                            <div class="aa-product-rating">
+                                                                <span class="fa fa-star{% if rs.rate < 1 %}-o empty{% endif %}"></span>
+                                                                <span class="fa fa-star{% if rs.rate < 2 %}-o empty{% endif %}"></span>
+                                                                <span class="fa fa-star{% if rs.rate < 3 %}-o empty{% endif %}"></span>
+                                                                <span class="fa fa-star{% if rs.rate < 4 %}-o empty{% endif %}"></span>
+                                                                <span class="fa fa-star{% if rs.rate < 5 %}-o empty{% endif %}"></span>
+                                                            </div>
+                                                            <p style="font-weight:600;display: block;margin-block-start: 1em;margin-block-end: 1em;margin-inline-start: 0px;margin-inline-end: 0px">{{ rs.subject }}</p>
+                                                            <p style="display: block;margin-block-start: 1em;margin-block-end: 1em;margin-inline-start: 0px;margin-inline-end: 0px">{{ rs.comment }}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                            {% endfor %}
+
+
+                                        </ul>
+                                        <h4 style="font-size: 25px; font-weight: bold;margin-bottom: 20px;text-transform: uppercase">
+                                            Yorum ekle</h4>
+                                        <div class="aa-your-rating" style="margin-bottom: 20px;">
+
+                                        </div>
+                                        <!-- review form -->
+                                        <form action="/product/addcomment/{{ product.id }}" method="post"
+                                              class="aa-review-form">
+                                            {% csrf_token %}
+
+                                            <!--<div class="form-group">
+                                                <label style="display: inline-block;max-width: 100%;margin-bottom: 5px;font-weight: bold;" for="name">Name</label>
+                                                <input type="text" class="form-control"  id="name" placeholder="İsminiz" style="box-shadow: none;border-radius: 0">
+                                            </div>-->
+
+                                            <div class="form-group">
+                                                <label style="display: inline-block;max-width: 100%;margin-bottom: 5px;font-weight: bold;"
+                                                       for="email">Başlık</label>
+                                                <input type="text" name="subject" class="form-control" id="email"
+                                                       placeholder="Başlık" style="box-shadow: none;border-radius: 0">
+                                            </div>
+
+                                            <div class="form-group" style="margin-bottom: 15px;">
+                                                <label style="display: inline-block;max-width: 100%;margin-bottom: 5px;font-weight: bold;"
+                                                       for="message">Yorumunuz</label>
+                                                <textarea class="form-control" rows="3" id="message" name="comment"
+                                                          placeholder="Yorumunuz..."
+                                                          style="box-shadow: none;border-radius: 0"></textarea>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <p style="color: #7fad39 !important;display: inline-block;max-width: 100%;margin-bottom: 5px;font-weight: bold;margin-right: 5px;}">
+                                                    Değerlendirmeniz</p><br>
+
+                                                <span class="star-rating star-5">
+                                                  <input type="radio" name="rate" id="star1" value="1"><i></i>
+                                                  <input type="radio" name="rate" id="star2" value="2"><i></i>
+                                                  <input type="radio" name="rate" id="star3" value="3"><i></i>
+                                                  <input type="radio" name="rate" id="star4" value="4"><i></i>
+                                                  <input type="radio" name="rate" id="star5" value="5"><i></i>
+                                                </span>
+                                            </div>
+                                            {% if user.id is not None %}
+                                                <button type="submit" class="btn btn-default aa-review-submit"
+                                                        style="background-color: #7fad39;border-color: #7fad39;border-radius: 0;font-size: 18px;height: 45px;text-transform: uppercase;width: 100%;color: #fff;-webkit-transition: all 0.5s;-moz-transition: all 0.5s;-ms-transition: all 0.5s;-o-transition: all 0.5s;transition: all 0.5s;">
+                                                    Submit
+                                                </button>
+                                            {% else %}
+                                                <p style="color: black">Yorum yapmak için <a href="/login" style=" font-weight:bold;text-decoration: underline;color: #7fad39">login</a>  olunuz!!!</p>
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+
+
                     </div>
                 </div>
             </div>
