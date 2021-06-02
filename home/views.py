@@ -7,7 +7,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from home.models import Setting, ContactFormMessage, ContactFormu
 from product.models import Product, Category, Images, Comment
-
+from home.forms import SearchForm
+import json
 
 def index(request):
     sliderData = Product.objects.all()[:5]
@@ -82,11 +83,45 @@ def product_detail(request, id, slug):
     comments = Comment.objects.filter(product_id=id)
     product = Product.objects.get(pk=id)
     images = Images.objects.filter(product_id=id)
+    commentCount = Comment.objects.all().count()
     context = {
         'product': product,
         'category': category,
         'images': images,
-        'comments': comments
+        'comments': comments,
+        'commentCount': commentCount
     }
 
     return render(request, 'product_detail.html', context)
+
+
+def product_search(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            category = Category.objects.all()
+            query = form.cleaned_data['query']
+            products = Product.objects.filter(title__icontains=query)
+            context = {
+                'products': products,
+                'category': category,
+            }
+            return render(request, 'products_search.html', context)
+
+    return HttpResponseRedirect('/')
+
+
+def product_search_auto(request):
+    if request.is_ajax():
+        q = request.GET.get('term', '')
+        product = Product.objects.filter(title__icontains=q)
+        results = []
+        for rs in product:
+            product_json = {}
+            product_json = rs.title
+            results.append(product_json)
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
