@@ -1,3 +1,4 @@
+from django.contrib.auth import logout, login, authenticate
 from django.shortcuts import render
 from django.contrib import messages
 
@@ -9,6 +10,7 @@ from home.models import Setting, ContactFormMessage, ContactFormu
 from product.models import Product, Category, Images, Comment
 from home.forms import SearchForm
 import json
+
 
 def index(request):
     sliderData = Product.objects.all()[:5]
@@ -118,10 +120,33 @@ def product_search_auto(request):
         results = []
         for rs in product:
             product_json = {}
-            product_json = rs.title
+            product_json = rs.title + " - " + rs.author
             results.append(product_json)
         data = json.dumps(results)
     else:
         data = 'fail'
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            messages.warning(request, "Giriş Başarısız. Bilgilerinizi Kontrol Ediniz.")
+            return HttpResponseRedirect('/login')
+    category = Category.objects.all()
+    context = {
+        'category': category,
+    }
+    return render(request, 'login.html', context)
