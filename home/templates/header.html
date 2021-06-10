@@ -155,18 +155,21 @@
                         <div class="header__top__right__language">
                             <img src="img/language.png" alt="">
                             {% if user.id is not None %}
-                                <a href="#" style="text-decoration: none;color: black"><i class="fa fa-user"></i> {{ user.first_name }}</a>
+                                <a href="#" style="text-decoration: none;color: black"><i
+                                        class="fa fa-user"></i> {{ user.first_name }}</a>
                                 <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Hesabım</a></li>
-                                    <li><a href="#">İstek Listesi</a></li>
-                                    <li><a href="#">Karşılaştır</a></li>
-                                    <li><a href="#">Ödeme</a></li>
-                                    <li><a href="/logout/">Hesaptan Çık</a></li>
+                                <ul style="width: 200px">
+                                    <li style="padding: 10px"><a href="/user">Hesabım</a></li>
+                                    <li style="padding: 10px"><a href="#">İstek Listesi</a></li>
+                                    <li style="padding: 10px"><a href="#">Karşılaştır</a></li>
+                                    <li style="padding: 10px"><a href="#">Ödeme</a></li>
+                                    <li style="padding: 10px"><a href="/logout/">Hesaptan Çık</a></li>
                                 </ul>
                             {% else %}
-                                <a href="/login/" style="text-decoration: none;color: black;font-weight: bold">Giriş</a> /
-                                <a href="/signup/" style="text-decoration: none;color: black;font-weight: bold"> Kayıt</a>
+                                <a href="/login/" style="text-decoration: none;color: black;font-weight: bold">Giriş</a>
+                                /
+                                <a href="/signup/" style="text-decoration: none;color: black;font-weight: bold">
+                                    Kayıt</a>
 
                             {% endif %}
 
