@@ -191,16 +191,14 @@
                         <div class="product__details__price">{{ product.price }} &#8378;</div>
                         <p>{{ product.description }}</p>
 
-                        <div class="product__details__quantity">
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="number" value="1" min="0" max="{{ product.amount }}">
-                                </div>
-                            </div>
-                        </div>
 
-                        <a href="#" class="primary-btn">ADD TO CARD</a>
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <form action="/order/addtocart/{{ product.id }}" method="post">
+                            {% csrf_token %}
+                            Adet: <input name="quantity" style="padding: 13px" type="number" value="1" min="0"
+                                         max="{{ product.amount }}">
+                            <button type="submit" class="primary-btn">SEPETE EKLE</button>
+                            {#                            <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>#}
+                        </form>
                         <ul>
                             <li><b>Yayın Evi</b> <span>{{ product.publisher }}</span></li>
                             <li><b>Yayınlanma Yılı</b> <span>{{ product.year_released }}</span></li>
@@ -336,7 +334,9 @@
                                                     Submit
                                                 </button>
                                             {% else %}
-                                                <p style="color: black">Yorum yapmak için <a href="/login" style=" font-weight:bold;text-decoration: underline;color: #7fad39">login</a>  olunuz!!!</p>
+                                                <p style="color: black">Yorum yapmak için <a href="/login"
+                                                                                             style=" font-weight:bold;text-decoration: underline;color: #7fad39">login</a>
+                                                    olunuz!!!</p>
                                             {% endif %}
                                         </form>
                                     </div>

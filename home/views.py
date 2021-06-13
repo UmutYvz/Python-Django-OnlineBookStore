@@ -6,7 +6,7 @@ from django.contrib import messages
 
 from django.http import HttpResponse, HttpResponseRedirect
 
-from home.models import Setting, ContactFormMessage, ContactFormu
+from home.models import Setting, ContactFormMessage, ContactFormu, UserProfile
 from product.models import Product, Category, Images, Comment
 from home.forms import SearchForm, SignUpForm
 import json
@@ -160,7 +160,13 @@ def signup_view(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
-            login(request,user)
+            login(request, user)
+            current_user = request.user
+            data = UserProfile()
+            data.user_id = current_user.id
+            data.image = "images/users/user.png"
+            data.save()
+            messages.success(request, 'Üyelik işlemleriniz başarıyla tamamlandı.')
             return HttpResponseRedirect('/')
 
     form = SignUpForm()

@@ -18,6 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from home import views
+from order import views as orderviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('product/', include('product.urls')),
     path('user/', include('user.urls')),
+    path('order/', include('order.urls')),
     path('hakkimizda/', views.aboutus, name='hakkimizda'),
     path('referanslar', views.references, name='referanslar'),
     path('iletisim', views.contact, name='iletisim'),
@@ -38,6 +40,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout_view'),
     path('login/', views.login_view, name='login_view'),
     path('signup/', views.signup_view, name='signup_view'),
+    path('shopcart/', orderviews.shopcart, name='shopcart'),
     path('user_profile/', views.signup_view, name='signup_view'),
 
 ]
