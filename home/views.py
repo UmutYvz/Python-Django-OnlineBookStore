@@ -7,18 +7,22 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 
 from home.models import Setting, ContactFormMessage, ContactFormu, UserProfile
+from order.models import ShopCart
 from product.models import Product, Category, Images, Comment
 from home.forms import SearchForm, SignUpForm
 import json
 
 
 def index(request):
+    current_user = request.user
+
     sliderData = Product.objects.all()[:5]
     setting = Setting.objects.get(pk=1)
     category = Category.objects.all()
     dailyProducts = Product.objects.all()[:4]
     lastProducts = Product.objects.all().order_by('-id')[:4]
     randomProducts = Product.objects.all().order_by('?')[:4]
+    request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()
 
     context = {'setting': setting,
                'page': 'home',
@@ -64,7 +68,8 @@ def contact(request):
 
     setting = Setting.objects.get(pk=1)
     form = ContactFormu()
-    context = {'setting': setting, 'page': 'iletisim', 'form': form}
+    category = Category.objects.all()
+    context = {'setting': setting, 'page': 'iletisim', 'form': form,'category':category}
     return render(request, 'contactus.html', context)
 
 

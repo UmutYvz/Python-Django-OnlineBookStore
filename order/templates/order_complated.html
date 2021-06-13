@@ -1,0 +1,45 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} Alışveriş Sepetiniz -  {{ setting.company }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %}
+    <link rel="shorcut icon" type="image/x-icon" href="{{ setting.icon.url }}"/>
+{% endblock %}
+
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumbb.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2> Sipariş Bilgileriniz </h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="checkout spad">
+        <div class="container">
+            <h3>Sayın, <strong>{{ user.first_name }} {{ user.last_name }}</strong></h3> <br>
+            <h4>Siparişiz başarıyla tamamlandı.</h4><br>
+            <h4>Sipariş Kodunuz: <strong>{{ ordercode }}</strong></h4><br>
+            <h5>Kitabınızın keyfini çıkartın. İyi günler.</h5><br>
+
+        </div>
+    </section>
+
+{% endblock %}
+
+
+{% block body %}
+
+{% endblock %}
