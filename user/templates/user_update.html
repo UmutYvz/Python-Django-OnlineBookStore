@@ -1,0 +1,105 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} Kullanıcı Paneli {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %}
+    <link rel="shorcut icon" type="image/x-icon" href="{{ setting.icon.url }}"/>
+{% endblock %}
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+{% block content %}
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumbb.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Kullanıcı Paneli</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Anasayfa&nbsp;&nbsp; </a>
+                            <span>Bilgileri Güncelle</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__item">
+
+                            <h4>Kullanıcı Paneli</h4>
+                            {% include "user_panel.html" %}
+                        </div>
+                        <div class="sidebar__item">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-9 col-md-7">
+                    <div class="product__discount">
+                        <div class="section-title product__discount__title">
+                            <h2>BİLGİLERİ GÜNCELLE</h2>
+                        </div>
+                        <div class="row">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="media" style="margin-bottom: 30px">
+                                            <img src="{{ user.userprofile.image.url }}"
+                                                 style="height: 150px;border-radius: 45px">
+                                        </div>
+                                        {% if messages %}
+                                            {% for message in messages %}
+                                                <div class="alert alert-{{ message.tags }}" role="alert">
+                                                    {{ message }}
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                        <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                                            <fieldset class="form-group">
+                                                <div class="form-group">
+                                                    {{ user_form.as_p }}
+                                                </div>
+
+                                                <div class="form-group">
+                                                    {{ profile_form.as_p }}
+                                                </div>
+
+                                            </fieldset>
+
+                                            <button type="submit">GÜNCELLE</button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+
+
+
+
+
+{% endblock %}
+
+
+{% block body %}
+
+{% endblock %}
