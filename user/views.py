@@ -1,11 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from home.models import UserProfile, Setting
+from order.models import Order, OrderProduct
 from product.models import Category
 from user.forms import ProfileUpdateForm, UserUpdateForm
 
@@ -54,7 +56,7 @@ def change_password(request):
             messages.success(request, 'Şifreniz başarıyla değiştirildi')
             return HttpResponseRedirect('/user')
         else:
-            messages.error(request, 'Bir hata oluştu.<br>'+str(form.errors))
+            messages.error(request, 'Bir hata oluştu.<br>' + str(form.errors))
             return HttpResponseRedirect('/user/password')
     else:
         category = Category.objects.all()
@@ -63,3 +65,29 @@ def change_password(request):
             'form': form,
             'category': category
         })
+
+
+@login_required(login_url='/login')
+def orders(request):
+    category = Category.objects.all()
+    current_user = request.user
+    orders = Order.objects.filter(user_id=current_user.id)
+    context = {
+        'category': category,
+        'orders': orders
+    }
+    return render(request, 'user_orders.html', context)
+
+
+@login_required(login_url='/login')
+def orderdetail(request, id):
+    category = Category.objects.all()
+    current_user = request.user
+    order = Order.objects.get(user_id=current_user.id, id=id)
+    orderitems = OrderProduct.objects.filter(order_id=id)
+    context = {
+        'order': order,
+        'category': category,
+        'order_items': orderitems
+    }
+    return render(request, 'user_order_detail.html', context)

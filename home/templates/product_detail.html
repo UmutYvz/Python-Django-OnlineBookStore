@@ -188,7 +188,7 @@
                             <i class="fa fa-star-half-o"></i>
                             <span>(18 reviews)</span>
                         </div>
-                        <div class="product__details__price">{{ product.price }} &#8378;</div>
+                        <div class="product__details__price">{{ product.price|floatformat:2 }} &#8378;</div>
                         <p>{{ product.description }}</p>
 
 
@@ -197,7 +197,7 @@
                             Adet: <input name="quantity" style="padding: 13px" type="number" value="1" min="0"
                                          max="{{ product.amount }}">
                             <button type="submit" class="primary-btn">SEPETE EKLE</button>
-                            {#                            <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>#}
+
                         </form>
                         <ul>
                             <li><b>Yayın Evi</b> <span>{{ product.publisher }}</span></li>
