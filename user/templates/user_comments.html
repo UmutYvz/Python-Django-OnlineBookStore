@@ -1,0 +1,120 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} Kullanıcı Yorumları  {{ setting.company }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %}
+    <link rel="shorcut icon" type="image/x-icon" href="{{ setting.icon.url }}"/>
+{% endblock %}
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+{% block content %}
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumbb.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Kullanıcı Yorumları</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Anasayfa&nbsp;&nbsp; </a>
+                            <span>Yorumlarım</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__item">
+
+                            <h4>Kullanıcı Menusu</h4>
+                            {% include "user_panel.html" %}
+                        </div>
+                        <div class="sidebar__item">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-7">
+                    <div class="product__discount">
+                        <div class="section-title product__discount__title">
+                            <h2>YORUMLARIM</h2>
+                        </div>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="row">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="shoping__cart__table">
+                                            <table>
+                                                <tr>
+                                                    <th class="text-left">Ürün</th>
+                                                    <th class="text-left">Değerlendirme</th>
+                                                    <th class="text-left">Konu</th>
+                                                    <th class="text-left">Mesaj</th>
+                                                    <th class="text-left">Durum</th>
+                                                    <th class="text-left">Tarih</th>
+                                                    <th class="text-left">Sil</th>
+                                                </tr>
+                                                {% for rs in comments %}
+                                                    <tr>
+                                                        <td class="text-left">
+                                                            <a style="text-decoration: none;color: black"
+                                                               href="/product/{{ rs.product.id }}/{{ rs.product.slug }}">
+                                                                <strong><u>{{ rs.product.title }}</u></strong>
+                                                            </a>
+                                                        </td>
+                                                        <td class="text-left">{{ rs.rate }}</td>
+                                                        <td class="text-left">{{ rs.subject }}</td>
+                                                        <td class="text-left">{{ rs.comment }}</td>
+                                                        <td class="text-left">{{ rs.status }}</td>
+                                                        <td class="text-left">{{ rs.created_at }}</td>
+                                                        <td class="text-left">
+                                                            <a class="btn btn-outline-info"
+                                                               href="/user/deletecomment/{{ rs.id }}"
+                                                               onclick="return confirm('Dur! Silmek istediğine emin misin?')">Sil</a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+
+
+
+
+
+{% endblock %}
+
+
+{% block body %}
+
+{% endblock %}
