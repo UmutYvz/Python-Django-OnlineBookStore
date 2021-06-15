@@ -6,7 +6,9 @@ from django.contrib import messages
 
 from django.http import HttpResponse, HttpResponseRedirect
 
+import product
 from home.models import Setting, ContactFormMessage, ContactFormu, UserProfile
+from home.models import FAQ as sss
 from order.models import ShopCart
 from product.models import Product, Category, Images, Comment
 from home.forms import SearchForm, SignUpForm
@@ -69,7 +71,7 @@ def contact(request):
     setting = Setting.objects.get(pk=1)
     form = ContactFormu()
     category = Category.objects.all()
-    context = {'setting': setting, 'page': 'iletisim', 'form': form,'category':category}
+    context = {'setting': setting, 'page': 'iletisim', 'form': form, 'category': category}
     return render(request, 'contactus.html', context)
 
 
@@ -90,7 +92,7 @@ def product_detail(request, id, slug):
     comments = Comment.objects.filter(product_id=id)
     product = Product.objects.get(pk=id)
     images = Images.objects.filter(product_id=id)
-    commentCount = Comment.objects.all().count()
+    commentCount = Comment.objects.filter(product_id=id).count()
     context = {
         'product': product,
         'category': category,
@@ -181,3 +183,13 @@ def signup_view(request):
         'form': form,
     }
     return render(request, 'signup.html', context)
+
+
+def FAQ(request):
+    category = Category.objects.all()
+    faq = sss.objects.all().order_by('ordernumber')
+    context = {
+        'category': category,
+        'faq': faq
+    }
+    return render(request, 'faq.html', context)

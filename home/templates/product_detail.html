@@ -181,12 +181,8 @@
                     <div class="product__details__text">
                         <h3>{{ product.title }}</h3>
                         <div class="product__details__rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                            <span>(18 reviews)</span>
+
+                            <span>{{commentCount}} tane yorum var.</span>
                         </div>
                         <div class="product__details__price">{{ product.price|floatformat:2 }} &#8378;</div>
                         <p>{{ product.description }}</p>
@@ -259,6 +255,7 @@
                                                             <a href="#" style="margin-right: 10px;">
                                                                 <img class="media-object"
                                                                      src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5f4bd7a6-f763-4518-9b81-bdfd40ce3fc9/d26yf2h-e858f532-4b44-4584-a255-fdedf789cb0b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzVmNGJkN2E2LWY3NjMtNDUxOC05YjgxLWJkZmQ0MGNlM2ZjOVwvZDI2eWYyaC1lODU4ZjUzMi00YjQ0LTQ1ODQtYTI1NS1mZGVkZjc4OWNiMGIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ZzXpoMDLZrRAgEjqk0TVOV8RMiA_MBx5xhq99fdUZUg"
+{#                                                                     src="{{ rs }}"#}
                                                                      alt="girl image" width="120px">
                                                             </a>
                                                         </div>
@@ -331,7 +328,7 @@
                                             {% if user.id is not None %}
                                                 <button type="submit" class="btn btn-default aa-review-submit"
                                                         style="background-color: #7fad39;border-color: #7fad39;border-radius: 0;font-size: 18px;height: 45px;text-transform: uppercase;width: 100%;color: #fff;-webkit-transition: all 0.5s;-moz-transition: all 0.5s;-ms-transition: all 0.5s;-o-transition: all 0.5s;transition: all 0.5s;">
-                                                    Submit
+                                                    Gönder
                                                 </button>
                                             {% else %}
                                                 <p style="color: black">Yorum yapmak için <a href="/login"

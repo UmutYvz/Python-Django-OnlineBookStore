@@ -32,7 +32,7 @@ urlpatterns = [
     path('hakkimizda/', views.aboutus, name='hakkimizda'),
     path('referanslar', views.references, name='referanslar'),
     path('iletisim', views.contact, name='iletisim'),
-
+    path('faq', views.FAQ, name='faq'),
     path('category/<int:id>/<slug:slug>', views.category_products, name='category_products'),
     path('product/<int:id>/<slug:slug>', views.product_detail, name='products_detail'),
     path('search/', views.product_search, name="product_search"),

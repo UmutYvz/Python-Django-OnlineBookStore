@@ -1,0 +1,119 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} Sıkça Sorulan Sorular {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %}
+    <link rel="shorcut icon" type="image/x-icon" href="{{ setting.icon.url }}"/>
+    <style>
+        h2 {
+            font-weight: 800;
+            font-size: 2.5rem;
+            color: black;
+            text-transform: uppercase;
+        }
+
+        .accordion-section .panel-default > .panel-heading {
+            border: 0;
+            background: #f4f4f4;
+            padding: 0;
+        }
+
+        .accordion-section .panel-default .panel-title a {
+            display: block;
+            color: black;
+            font-size: 1.5rem;
+        }
+
+        .accordion-section .panel-default .panel-title a:after {
+            font-family: 'FontAwesome';
+            font-style: normal;
+            font-size: 3rem;
+            content: "\f106";
+            color: #7fad39;
+            float: right;
+            margin-top: -12px;
+        }
+
+        .accordion-section .panel-default .panel-title a.collapsed:after {
+            content: "\f107";
+        }
+
+        .accordion-section .panel-default .panel-body {
+            font-size: 1.2rem;
+        }
+    </style>
+{% endblock %}
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+
+
+{% block content %}
+
+    <style>
+        /* setting the text-align property to center*/
+        td th {
+            padding: 5px;
+            text-align: center;
+
+        }
+    </style>
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumbb.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Sıkça Sorulan Sorular</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Anasayfa&nbsp;&nbsp; </a>
+                            <span>Sıkça Sorulan Sorular</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <section class="accordion-section clearfix mt-3" aria-label="Question Accordions">
+        <div class="container">
+<BR>
+<BR>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                {% for rs in faq %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading p-3 mb-3" role="tab" id="heading{{ rs.id }}">
+                            <h3 class="panel-title">
+                                <a class="collapsed" role="button" title="" data-toggle="collapse"
+                                   data-parent="#accordion"
+                                   href="#collapse{{ rs.id }}" aria-expanded="true" aria-controls="collapse0">
+                                    {{ rs.question }}
+                                </a>
+                            </h3>
+                        </div>
+                        <div id="collapse{{ rs.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ rs.id }}">
+                            <div class="panel-body px-3 mb-4">
+                                <p>{{ rs.answer }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+{% endblock %}
+
+
+{% block body %}
+
+{% endblock %}
